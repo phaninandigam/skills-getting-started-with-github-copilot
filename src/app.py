@@ -26,6 +26,60 @@ activities = {
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
         "max_participants": 12,
         "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
+        },
+        "Programming Class": {
+        "description": "Learn programming fundamentals and build software projects",
+        "schedule": "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
+        "max_participants": 20,
+        "participants": ["emma@mergington.edu", "sophia@mergington.edu"]
+        },
+        "Gym Class": {
+        "description": "Physical education and sports activities",
+        "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
+        "max_participants": 30,
+        "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+        },
+        "Basketball Team": {
+        "description": "Competitive basketball training and games",
+        "schedule": "Mondays and Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 15,
+        "participants": ["alex@mergington.edu"]
+        },
+        "Soccer Club": {
+        "description": "Soccer practice and friendly matches",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": ["jordan@mergington.edu", "casey@mergington.edu"]
+        },
+        "Art Studio": {
+        "description": "Painting, drawing, and visual arts exploration",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": ["isabella@mergington.edu"]
+        },
+        "Music Ensemble": {
+        "description": "Orchestra and band performance group",
+        "schedule": "Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 25,
+        "participants": ["liam@mergington.edu", "ava@mergington.edu"]
+        },
+        "Debate Team": {
+        "description": "Develop critical thinking and public speaking skills",
+        "schedule": "Mondays, 3:30 PM - 5:00 PM",
+        "max_participants": 14,
+        "participants": ["benjamin@mergington.edu"]
+        },
+        "Science Club": {
+        "description": "Explore STEM concepts through experiments and projects",
+        "schedule": "Thursdays, 3:30 PM - 4:30 PM",
+        "max_participants": 18,
+        "participants": ["grace@mergington.edu", "henry@mergington.edu"]
+        }
+    "Chess Club": {
+        "description": "Learn strategies and compete in chess tournaments",
+        "schedule": "Fridays, 3:30 PM - 5:00 PM",
+        "max_participants": 12,
+        "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
     },
     "Programming Class": {
         "description": "Learn programming fundamentals and build software projects",
@@ -62,6 +116,10 @@ def signup_for_activity(activity_name: str, email: str):
     # Get the specific activity
     activity = activities[activity_name]
 
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
+    
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
